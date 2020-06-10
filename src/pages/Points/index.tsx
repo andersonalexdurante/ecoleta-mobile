@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, TouchableOpacity, Text, ScrollView } from 'react-native'
+import { View, TouchableOpacity, Text, ScrollView, Image } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 import { SvgUri } from 'react-native-svg'
 import styles from './styles'
 
@@ -12,6 +12,10 @@ const Points = () => {
 
     function navigateBack() {
         navigation.goBack()
+    }
+
+    function handleNavigateToDetail() {
+        navigation.navigate('Detail')
     }
 
     return (
@@ -32,8 +36,22 @@ const Points = () => {
                     longitude: -48.473738, 
                     latitudeDelta: 0.014,
                     longitudeDelta: 0.014
-                }}
-                />
+                }}>
+                    <Marker 
+                    onPress={handleNavigateToDetail}
+                    style={styles.mapMarker}
+                    coordinate={{
+                        latitude: -25.6955322, 
+                        longitude: -48.473738, 
+                    }}
+                    >
+                        <View style={styles.mapMarkerContainer}>
+                            <Image style={styles.mapMarkerImage} source={{uri: "https://images.unsplash.com/photo-1488928741225-2aaf732c96cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60"}}/>
+                            <Text style={styles.mapMarkerTitle}>IFPR</Text>
+                        </View>
+                    </Marker>
+
+                </MapView>
 
 
             </View>
